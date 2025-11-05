@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bureau des Indépendants - L'Équipage Étudiant</title>
+    <title>Bureau des Indépendants - Cyber Pirates</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Crimson+Text:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Roboto+Mono:wght@400;500;700&display=swap');
         
         * {
             margin: 0;
@@ -14,252 +14,269 @@
         }
         
         body {
-            font-family: 'Crimson Text', serif;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
-            color: #f4e4c1;
+            font-family: 'Share Tech Mono', monospace;
+            background: #0a0a0a;
+            color: #c0c0c0;
             overflow-x: hidden;
+            position: relative;
         }
         
-        .parchment-bg {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4"/><feColorMatrix values="0 0 0 0 0.9, 0 0 0 0 0.8, 0 0 0 0 0.6, 0 0 0 0.1 0"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.15"/></svg>');
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
         
         header {
-            background: linear-gradient(180deg, rgba(26,31,58,0.95) 0%, rgba(15,20,35,0.9) 100%);
-            border-bottom: 3px solid #d4af37;
+            background: rgba(15, 15, 15, 0.95);
+            border-bottom: 1px solid #333;
             padding: 1.5rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
         }
         
         .header-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
         
         .logo {
-            font-family: 'Pirata One', cursive;
-            font-size: 2.5rem;
-            color: #d4af37;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 20px rgba(212,175,55,0.4);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
             display: flex;
             align-items: center;
             gap: 1rem;
+            letter-spacing: 1px;
         }
         
-        .skull {
-            font-size: 2.5rem;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .logo-icon {
+            font-size: 1.8rem;
+            opacity: 0.9;
         }
         
         nav {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
         }
         
         nav a {
-            color: #f4e4c1;
+            color: #999;
             text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
             position: relative;
             padding: 0.5rem 0;
+            letter-spacing: 0.5px;
         }
         
-        nav a:after {
+        nav a:hover {
+            color: #fff;
+        }
+        
+        nav a::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 0;
-            height: 2px;
-            background: #d4af37;
-            transition: width 0.3s;
+            height: 1px;
+            background: #666;
+            transition: width 0.3s ease;
         }
         
-        nav a:hover {
-            color: #d4af37;
-        }
-        
-        nav a:hover:after {
+        nav a:hover::after {
             width: 100%;
         }
         
         .hero {
-            padding: 6rem 2rem;
+            padding: 8rem 2rem;
             text-align: center;
             background: 
-                linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%230a0e27"/><path d="M0,300 Q300,250 600,300 T1200,300 L1200,600 L0,600 Z" fill="%231a1f3a" opacity="0.5"/></svg>');
-            background-size: cover;
+                radial-gradient(circle at 50% 50%, rgba(40, 40, 40, 0.3) 0%, transparent 70%),
+                #0a0a0a;
             position: relative;
-        }
-        
-        .hero:before {
-            content: '⚓';
-            position: absolute;
-            font-size: 15rem;
-            opacity: 0.05;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            z-index: 1;
         }
         
         .hero h1 {
-            font-family: 'Pirata One', cursive;
+            font-family: 'Roboto Mono', monospace;
             font-size: 4rem;
-            margin-bottom: 1rem;
-            color: #d4af37;
-            text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
-            position: relative;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            letter-spacing: 3px;
         }
         
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            font-style: italic;
-            position: relative;
+        .terminal-text {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #888;
+        }
+        
+        .terminal-text::before {
+            content: '$ ';
+            color: #666;
         }
         
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
-            color: #f4e4c1;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 1.2rem 3rem;
+            font-size: 1rem;
             text-decoration: none;
-            border: 2px solid #d4af37;
-            border-radius: 5px;
-            font-weight: 700;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            position: relative;
+            border: 1px solid #444;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(212,175,55,0.4);
-            background: linear-gradient(135deg, #a00000 0%, #ff1744 100%);
+            background: #222;
+            border-color: #666;
+            transform: translateY(-2px);
         }
         
         .section {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 1;
         }
         
         .section h2 {
-            font-family: 'Pirata One', cursive;
-            font-size: 3rem;
-            color: #d4af37;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
             text-align: center;
-            margin-bottom: 3rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .section h2::before {
+            content: '// ';
+            color: #555;
+            margin-right: 0.5rem;
         }
         
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
         
         .card {
-            background: linear-gradient(135deg, rgba(26,31,58,0.8) 0%, rgba(15,20,35,0.8) 100%);
-            border: 2px solid #d4af37;
-            padding: 2rem;
-            border-radius: 10px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            background: #141414;
+            border: 1px solid #2a2a2a;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
         }
         
         .card:hover {
-            transform: translateY(-10px) rotate(1deg);
-            box-shadow: 0 8px 25px rgba(212,175,55,0.3);
+            background: #1a1a1a;
+            border-color: #404040;
+            transform: translateY(-5px);
         }
         
         .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .card h3 {
-            font-family: 'Pirata One', cursive;
-            font-size: 1.8rem;
-            color: #d4af37;
-            margin-bottom: 1rem;
-        }
-        
-        .card p {
-            line-height: 1.6;
-            font-size: 1.1rem;
-        }
-        
-        .treasure-box {
-            background: linear-gradient(135deg, rgba(139,0,0,0.3) 0%, rgba(220,20,60,0.3) 100%);
-            border: 3px solid #d4af37;
-            border-radius: 10px;
-            padding: 3rem;
-            text-align: center;
-            margin: 4rem 0;
-            box-shadow: inset 0 0 20px rgba(212,175,55,0.2), 0 4px 20px rgba(0,0,0,0.5);
-        }
-        
-        .treasure-box h3 {
-            font-family: 'Pirata One', cursive;
             font-size: 2.5rem;
-            color: #d4af37;
-            margin-bottom: 1rem;
-        }
-        
-        footer {
-            background: linear-gradient(180deg, rgba(15,20,35,0.9) 0%, rgba(10,14,39,0.95) 100%);
-            border-top: 3px solid #d4af37;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 4rem;
-        }
-        
-        footer p {
-            font-size: 1rem;
+            margin-bottom: 1.5rem;
             opacity: 0.8;
         }
         
-        .waves {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            pointer-events: none;
-            opacity: 0.3;
+        .card h3 {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        
+        .card p {
+            line-height: 1.8;
+            font-size: 1rem;
+            color: #999;
+        }
+        
+        .terminal-box {
+            background: #0f0f0f;
+            border: 1px solid #2a2a2a;
+            padding: 3rem;
+            text-align: center;
+            margin: 4rem 0;
+            position: relative;
+        }
+        
+        .terminal-box::before {
+            content: '> SYSTEM MESSAGE';
+            position: absolute;
+            top: -1px;
+            left: 20px;
+            background: #0a0a0a;
+            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
+            color: #666;
+            letter-spacing: 1px;
+        }
+        
+        .terminal-box h3 {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+        
+        .terminal-box p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #999;
+        }
+        
+        footer {
+            background: #0f0f0f;
+            border-top: 1px solid #2a2a2a;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 5rem;
+            position: relative;
             z-index: 1;
         }
         
-        .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100"><path d="M0,50 Q300,20 600,50 T1200,50 L1200,100 L0,100 Z" fill="%231a1f3a"/></svg>');
-            background-size: 50% 100%;
-            animation: wave 10s linear infinite;
+        footer p {
+            font-size: 0.9rem;
+            color: #666;
+            letter-spacing: 0.5px;
         }
         
-        @keyframes wave {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        .divider {
+            color: #333;
         }
         
         @media (max-width: 768px) {
@@ -268,114 +285,121 @@
             }
             
             .logo {
-                font-size: 1.8rem;
+                font-size: 1.2rem;
             }
             
             nav {
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: 0.8rem;
             }
             
             .header-content {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 1.5rem;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-<body class="parchment-bg">
+<body>
+    <div class="grid-bg"></div>
+    
     <header>
         <div class="header-content">
             <div class="logo">
-                <span class="skull">☠️</span>
-                Bureau des Indépendants
+                <span class="logo-icon">☠</span>
+                BUREAU DES INDÉPENDANTS
             </div>
             <nav>
-                <a href="#mission">Notre Mission</a>
-                <a href="#equipage">L'Équipage</a>
-                <a href="#evenements">Événements</a>
+                <a href="#mission">Mission</a>
+                <a href="#crew">Crew</a>
+                <a href="#operations">Operations</a>
                 <a href="#contact">Contact</a>
             </nav>
         </div>
     </header>
     
     <section class="hero">
-        <h1>⚓ Levons l'Ancre ! ⚓</h1>
-        <p>Le Bureau des Élèves qui refuse les eaux calmes</p>
-        <a href="#mission" class="cta-button">Rejoindre l'Équipage</a>
+        <h1>HACK THE SYSTEM</h1>
+        <p class="terminal-text">init_revolution.sh --mode=independent --target=campus</p>
+        <a href="#mission" class="cta-button">Access Mainframe</a>
     </section>
     
     <section id="mission" class="section">
-        <h2>⚔️ Notre Mission ⚔️</h2>
+        <h2>Core Protocol</h2>
         <div class="cards">
             <div class="card">
-                <div class="card-icon">🏴‍☠️</div>
-                <h3>Liberté</h3>
-                <p>Nous naviguons hors des sentiers battus. Notre boussole ? Votre voix, vos envies, votre créativité sans limites.</p>
+                <div class="card-icon">🔓</div>
+                <h3>FREEDOM.EXE</h3>
+                <p>Nous décryptons les codes obsolètes. Pas de hiérarchie rigide, pas de règles imposées. Nous codons notre propre réalité étudiante.</p>
             </div>
             <div class="card">
-                <div class="card-icon">🗺️</div>
-                <h3>Aventure</h3>
-                <p>Des événements uniques, des projets audacieux, des expériences inoubliables. Chaque semestre est une nouvelle expédition.</p>
+                <div class="card-icon">⚡</div>
+                <h3>INNOVATION.SYS</h3>
+                <p>Chaque événement est une nouvelle exploitation créative. Nous cassons les routines, nous créons des expériences impossibles.</p>
             </div>
             <div class="card">
-                <div class="card-icon">⚓</div>
-                <h3>Indépendance</h3>
-                <p>Pas de règles rigides, pas de codes dépassés. Nous créons notre propre légende, ensemble.</p>
+                <div class="card-icon">🌐</div>
+                <h3>NETWORK.NET</h3>
+                <p>Un collectif décentralisé où chaque nœud compte. Connecte-toi, contribue, deviens un agent du changement.</p>
             </div>
         </div>
     </section>
     
-    <section id="equipage" class="section">
-        <h2>🦜 L'Équipage 🦜</h2>
-        <div class="treasure-box">
-            <h3>Capitaines et Moussaillons</h3>
-            <p style="font-size: 1.2rem; line-height: 1.8;">
-                Notre équipage est composé d'étudiants passionnés qui refusent la monotonie. 
-                Que tu sois artiste, organisateur, rêveur ou rebelle, il y a une place pour toi sur notre navire. 
-                Ensemble, nous faisons vivre l'esprit étudiant autrement !
+    <section id="crew" class="section">
+        <h2>The Crew</h2>
+        <div class="terminal-box">
+            <h3>AUTHENTICATED USERS</h3>
+            <p style="font-size: 1.1rem; line-height: 2;">
+                > ACCÈS AUTORISÉ AUX PIRATES NUMÉRIQUES<br><br>
+                Notre crew est composé de hackers sociaux, d'artistes du code, de créateurs de chaos organisé. 
+                Nous sommes les fantômes dans la machine étudiante, ceux qui refusent le code legacy. 
+                Si tu es prêt à fork le système, tu as ta place parmi nous.<br><br>
+                <span style="color: #888;">[ ROOT ACCESS GRANTED ]</span>
             </p>
         </div>
     </section>
     
-    <section id="evenements" class="section">
-        <h2>🍻 Nos Événements 🍻</h2>
+    <section id="operations" class="section">
+        <h2>Operations</h2>
         <div class="cards">
             <div class="card">
                 <div class="card-icon">🎭</div>
-                <h3>Soirées Légendaires</h3>
-                <p>Des fêtes thématiques qui restent gravées dans les mémoires. Chaque soirée est une nouvelle aventure épique.</p>
+                <h3>NIGHT_RAIDS.BAT</h3>
+                <p>Soirées cryptées où seuls les initiés connaissent le code d'entrée. Expériences immersives dans les zones grises du campus.</p>
             </div>
             <div class="card">
                 <div class="card-icon">🎪</div>
-                <h3>Festivals Pirates</h3>
-                <p>Concerts, spectacles, compétitions. Notre campus devient un port d'attache pour tous les talents.</p>
+                <h3>CYBER_FEST.ISO</h3>
+                <p>Festivals underground où le digital rencontre le réel. Musique, art génératif, performances live, réalité augmentée.</p>
             </div>
             <div class="card">
-                <div class="card-icon">🎯</div>
-                <h3>Projets Collaboratifs</h3>
-                <p>Des initiatives créatives menées par les étudiants, pour les étudiants. Ton idée peut devenir réalité.</p>
+                <div class="card-icon">💻</div>
+                <h3>COLLAB_STACK.GIT</h3>
+                <p>Projets open-source gérés par la communauté. Ton idée + notre réseau = réalité déployée en production.</p>
             </div>
         </div>
     </section>
     
     <section id="contact" class="section">
-        <div class="treasure-box">
-            <h3>📨 Envoie-nous un Message dans une Bouteille</h3>
-            <p style="font-size: 1.2rem; margin: 1.5rem 0;">
-                Questions ? Idées de projets ? Envie de rejoindre l'équipage ?
+        <div class="terminal-box">
+            <h3>ESTABLISH CONNECTION</h3>
+            <p style="font-size: 1.1rem; margin: 2rem 0;">
+                > Questions? Ideas? Ready to join the network?<br>
+                > Transmit your encrypted message to our secure channel
             </p>
-            <a href="mailto:contact@bureaudesindependants.fr" class="cta-button">Nous Contacter</a>
+            <a href="mailto:contact@bureaudesindependants.fr" class="cta-button">Send Packet</a>
         </div>
     </section>
     
-    <div class="waves">
-        <div class="wave"></div>
-    </div>
-    
     <footer>
-        <p>⚓ Bureau des Indépendants - Où chaque étudiant est capitaine de son destin ⚓</p>
-        <p style="margin-top: 0.5rem;">🏴‍☠️ Naviguer différemment depuis 2025 🏴‍☠️</p>
+        <p class="divider">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+        <p style="margin: 1rem 0; color: #999;">☠ BUREAU DES INDÉPENDANTS ☠</p>
+        <p>[ DECENTRALIZED • ENCRYPTED • UNSTOPPABLE ]</p>
+        <p style="margin-top: 1rem;">sudo rm -rf /traditional_rules/* 2025</p>
     </footer>
 </body>
 </html>
