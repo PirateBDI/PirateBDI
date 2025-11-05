@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bureau des Indépendants - L'Équipage Étudiant</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Crimson+Text:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+            color: #f4e4c1;
+            overflow-x: hidden;
+        }
+        
+        .parchment-bg {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4"/><feColorMatrix values="0 0 0 0 0.9, 0 0 0 0 0.8, 0 0 0 0 0.6, 0 0 0 0.1 0"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.15"/></svg>');
+        }
+        
+        header {
+            background: linear-gradient(180deg, rgba(26,31,58,0.95) 0%, rgba(15,20,35,0.9) 100%);
+            border-bottom: 3px solid #d4af37;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: #d4af37;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 20px rgba(212,175,55,0.4);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .skull {
+            font-size: 2.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: #f4e4c1;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover {
+            color: #d4af37;
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        .hero {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: 
+                linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%230a0e27"/><path d="M0,300 Q300,250 600,300 T1200,300 L1200,600 L0,600 Z" fill="%231a1f3a" opacity="0.5"/></svg>');
+            background-size: cover;
+            position: relative;
+        }
+        
+        .hero:before {
+            content: '⚓';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .hero h1 {
+            font-family: 'Pirata One', cursive;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
+            position: relative;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
+            color: #f4e4c1;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border: 2px solid #d4af37;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212,175,55,0.4);
+            background: linear-gradient(135deg, #a00000 0%, #ff1744 100%);
+        }
+        
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section h2 {
+            font-family: 'Pirata One', cursive;
+            font-size: 3rem;
+            color: #d4af37;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, rgba(26,31,58,0.8) 0%, rgba(15,20,35,0.8) 100%);
+            border: 2px solid #d4af37;
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 8px 25px rgba(212,175,55,0.3);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.8rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+        
+        .card p {
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .treasure-box {
+            background: linear-gradient(135deg, rgba(139,0,0,0.3) 0%, rgba(220,20,60,0.3) 100%);
+            border: 3px solid #d4af37;
+            border-radius: 10px;
+            padding: 3rem;
+            text-align: center;
+            margin: 4rem 0;
+            box-shadow: inset 0 0 20px rgba(212,175,55,0.2), 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .treasure-box h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: linear-gradient(180deg, rgba(15,20,35,0.9) 0%, rgba(10,14,39,0.95) 100%);
+            border-top: 3px solid #d4af37;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        footer p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .waves {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100"><path d="M0,50 Q300,20 600,50 T1200,50 L1200,100 L0,100 Z" fill="%231a1f3a"/></svg>');
+            background-size: 50% 100%;
+            animation: wave 10s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="parchment-bg">
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="skull">☠️</span>
+                Bureau des Indépendants
+            </div>
+            <nav>
+                <a href="#mission">Notre Mission</a>
+                <a href="#equipage">L'Équipage</a>
+                <a href="#evenements">Événements</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <h1>⚓ Levons l'Ancre ! ⚓</h1>
+        <p>Le Bureau des Élèves qui refuse les eaux calmes</p>
+        <a href="#mission" class="cta-button">Rejoindre l'Équipage</a>
+    </section>
+    
+    <section id="mission" class="section">
+        <h2>⚔️ Notre Mission ⚔️</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">🏴‍☠️</div>
+                <h3>Liberté</h3>
+                <p>Nous naviguons hors des sentiers battus. Notre boussole ? Votre voix, vos envies, votre créativité sans limites.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🗺️</div>
+                <h3>Aventure</h3>
+                <p>Des événements uniques, des projets audacieux, des expériences inoubliables. Chaque semestre est une nouvelle expédition.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚓</div>
+                <h3>Indépendance</h3>
+                <p>Pas de règles rigides, pas de codes dépassés. Nous créons notre propre légende, ensemble.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="equipage" class="section">
+        <h2>🦜 L'Équipage 🦜</h2>
+        <div class="treasure-box">
+            <h3>Capitaines et Moussaillons</h3>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                Notre équipage est composé d'étudiants passionnés qui refusent la monotonie. 
+                Que tu sois artiste, organisateur, rêveur ou rebelle, il y a une place pour toi sur notre navire. 
+                Ensemble, nous faisons vivre l'esprit étudiant autrement !
+            </p>
+        </div>
+    </section>
+    
+    <section id="evenements" class="section">
+        <h2>🍻 Nos Événements 🍻</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">🎭</div>
+                <h3>Soirées Légendaires</h3>
+                <p>Des fêtes thématiques qui restent gravées dans les mémoires. Chaque soirée est une nouvelle aventure épique.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎪</div>
+                <h3>Festivals Pirates</h3>
+                <p>Concerts, spectacles, compétitions. Notre campus devient un port d'attache pour tous les talents.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Projets Collaboratifs</h3>
+                <p>Des initiatives créatives menées par les étudiants, pour les étudiants. Ton idée peut devenir réalité.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="section">
+        <div class="treasure-box">
+            <h3>📨 Envoie-nous un Message dans une Bouteille</h3>
+            <p style="font-size: 1.2rem; margin: 1.5rem 0;">
+                Questions ? Idées de projets ? Envie de rejoindre l'équipage ?
+            </p>
+            <a href="mailto:contact@bureaudesindependants.fr" class="cta-button">Nous Contacter</a>
+        </div>
+    </section>
+    
+    <div class="waves">
+        <div class="wave"></div>
+    </div>
+    
+    <footer>
+        <p>⚓ Bureau des Indépendants - Où chaque étudiant est capitaine de son destin ⚓</p>
+        <p style="margin-top: 0.5rem;">🏴‍☠️ Naviguer différemment depuis 2025 🏴‍☠️</p>
+    </footer>
+</body>
+</html>
